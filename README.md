@@ -32,7 +32,7 @@ Built as an **architectural migration from Express + TypeScript + Prisma to Java
 
 ## Why this repository is worth exploring
 
-The original backend already had useful separation through controllers, services, repository abstractions, Prisma adapters, Zod validation, and explicit response mappers. This version keeps that intent while removing reversed dependencies and moving the system toward a production-oriented modular monolith.
+The backend had useful separation through controllers, services, repository abstractions, Prisma adapters, Zod validation, and explicit response mappers. This version keeps that intent while removing reversed dependencies and moving the system toward a production-oriented modular monolith.
 
 The architecture also addresses concrete engineering problems found in the implementation:
 
