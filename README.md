@@ -2,7 +2,7 @@
 
 # Real Estate Management API
 
-### A production-minded Java backend for property operations, tenancy workflows, accounting, secure authentication, and cloud-ready file storage.
+### A production-minded Java backend for property operation, tenancy workflows, accounting, secure authentication, and cloud-ready file storage.
 
 Built as an **architectural migration from Express + TypeScript + Prisma to Java 26 + Spring Boot 4**, preserving useful business behavior while strengthening domain boundaries, security, transaction safety, observability, and deployment readiness.
 
