@@ -32,11 +32,9 @@ Built as an **architectural migration from Express + TypeScript + Prisma to Java
 
 ## Why this repository is worth exploring
 
-This is not a syntax-level TypeScript-to-Java rewrite.
+The original backend already had useful separation through controllers, services, repository abstractions, Prisma adapters, Zod validation, and explicit response mappers. This version keeps that intent while removing reversed dependencies and moving the system toward a production-oriented modular monolith.
 
-The original backend already had useful separation through controllers, services, repository abstractions, Prisma adapters, Zod validation, and explicit response mappers. The Java version keeps that intent while removing reversed dependencies and moving the system toward a production-oriented modular monolith.
-
-The migration also addresses concrete engineering problems found in the original implementation:
+The architecture also addresses concrete engineering problems found in the implementation:
 
 * public registration could request an `ADMIN` role;
 * an API mapper could expose password hashes;
@@ -50,7 +48,7 @@ The migration also addresses concrete engineering problems found in the original
 
 The Java implementation turns those findings into explicit architectural decisions: **pure domain models, repository ports, persistence adapters, transactional application services, safe API projections, rotating sessions, BigDecimal accounting, bounded reads, Flyway migrations, Redis-backed protection, private S3-compatible storage, metrics, tests, and container deployment assets.**
 
-> **Recruiter snapshot:** this repository demonstrates backend architecture, application security, relational data modeling, transaction design, cloud storage, observability, testing, containerization, and migration work—not only REST CRUD.
+> **Snapshot:** this repository demonstrates backend architecture, application security, relational data modeling, transaction design, cloud storage, observability, testing, containerization, and migration work—not only REST CRUD.
 
 ---
 
