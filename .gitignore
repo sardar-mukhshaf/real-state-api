@@ -1,0 +1,23 @@
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+/.pnp
+/.pnp.js
+/coverage
+/.DS_Store
+/.idea
+/.vscode
+/.history
+logs/
+*.log
+storage/*
+temp-uploads/*
+# Java build and task-local infrastructure
+.tools/
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+*.hprof
+*.jfr
+.java-version.local

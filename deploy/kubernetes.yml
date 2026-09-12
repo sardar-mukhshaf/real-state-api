@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: real-estate-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: real-estate-api}
+  template:
+    metadata:
+      labels: {app: real-estate-api}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3001"
+        prometheus.io/path: /actuator/prometheus
+    spec:
+      terminationGracePeriodSeconds: 40
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+        - name: api
+          image: real-estate-api:1.0.0
+          ports:
+            - {name: http, containerPort: 3000}
+            - {name: management, containerPort: 3001}
+          envFrom:
+            - configMapRef: {name: real-estate-config}
+            - secretRef: {name: real-estate-secrets}
+          resources:
+            requests: {cpu: 250m, memory: 512Mi}
+            limits: {cpu: "2", memory: 1Gi}
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities: {drop: [ALL]}
+          volumeMounts:
+            - {name: temp, mountPath: /tmp}
+          startupProbe:
+            httpGet: {path: /actuator/health/liveness, port: management}
+            failureThreshold: 30
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /actuator/health/liveness, port: management}
+            periodSeconds: 15
+          readinessProbe:
+            httpGet: {path: /actuator/health/readiness, port: management}
+            periodSeconds: 10
+      volumes:
+        - name: temp
+          emptyDir: {sizeLimit: 128Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: real-estate-api
+spec:
+  selector: {app: real-estate-api}
+  ports:
+    - {name: http, port: 80, targetPort: http}
+
